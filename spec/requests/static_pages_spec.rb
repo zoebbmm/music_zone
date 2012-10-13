@@ -2,63 +2,48 @@ require 'spec_helper'
 
 describe "Static pages" do
 
+  subject { page }
+
   describe "Home page" do
+    before { visit root_path }
 
-    it "should have the h1 'Music Zone'" do
-      visit '/static_pages/home'
-      page.should have_selector('h1', :text => 'Music Zone')
-    end
-
-    it "should have the base title" do
-      visit '/static_pages/home'
-      page.should have_selector('title',
-                                :text => "Music Zone Sample App")
-    end
-
-    it "should not have a custom page title" do
-      visit '/static_pages/home'
-      page.should_not have_selector('title', :text => '| Home')
-    end
+    it { should have_selector('h1',    text: 'Music Zone') }
+    it { should have_selector('title', text: full_title('')) }
+    it { should_not have_selector 'title', text: '| Home' }
   end
 
   describe "Help page" do
-    it "should have the h1 'Help'" do
-      visit '/static_pages/help'
-      page.should have_selector('h1', :text => 'Help')
-    end
+    before { visit help_path }
 
-    it "should have the title 'Help'" do
-      visit '/static_pages/help'
-      page.should have_selector('title',
-                                :text => "Music Zone Sample App | Help")
-    end
+    it { should have_selector('h1',    text: 'Help') }
+    it { should have_selector('title', text: full_title('Help')) }
   end
 
   describe "About page" do
+    before { visit about_path }
 
-    it "should have the h1 'About Us'" do
-      visit '/static_pages/about'
-      page.should have_selector('h1', :text => 'About Us')
-    end
-
-    it "should have the title 'About Us'" do
-      visit '/static_pages/about'
-      page.should have_selector('title',
-                                :text => "Music Zone Sample App | About Us")
-    end
+    it { should have_selector('h1',    text: 'About') }
+    it { should have_selector('title', text: full_title('About Us')) }
   end
 
-  describe "Whats-Hot page" do
+  describe "What is Hot page" do
+    before { visit whatshot_path }
 
-    it "should have the h1 'What is Hot'" do
-      visit '/static_pages/whatshot'
-      page.should have_selector('h1', :text => 'What is Hot')
-    end
+    it { should have_selector('h1',    text: 'What is Hot') }
+    it { should have_selector('title', text: full_title('What is Hot')) }
+  end
 
-    it "should have the title 'What is Hot'" do
-      visit '/static_pages/whatshot'
-      page.should have_selector('title',
-                                :text => "Music Zone Sample App | What is Hot")
-    end
+  describe "Artists page" do
+    before { visit artists_path }
+
+    it { should have_selector('h1',    text: 'Artists') }
+    it { should have_selector('title', text: full_title('Artists')) }
+  end
+
+  describe "Albums page" do
+    before { visit albums_path }
+
+    it { should have_selector('h1',    text: 'Albums') }
+    it { should have_selector('title', text: full_title('Albums')) }
   end
 end

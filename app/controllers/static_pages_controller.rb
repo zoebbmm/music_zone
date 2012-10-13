@@ -10,4 +10,10 @@ class StaticPagesController < ApplicationController
 
   def about
   end
+
+  def artists
+  end
+
+  def albums
+  end
 end
